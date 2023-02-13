@@ -144,15 +144,14 @@ export default function ProductsLayout(props: { children: ReactNode }) {
                         {item.badge}
                       </span>
                     )}
-                  </Link>
-                  {item.childMenu &&
-                    item.childMenu.map((child) => (
-                      <ul
-                        key={child.page}
-                        role="list"
-                        className=" ml-5 mt-2 space-y-2 border-l-2 border-slate-100 dark:border-slate-800 lg:mt-4 lg:space-y-4 lg:border-slate-200"
-                      >
-                        <li className="relative">
+                  </Link>{" "}
+                  <ul
+                    role="list"
+                    className=" ml-5 mt-2 space-y-2 border-l-2 border-slate-100 dark:border-slate-800 lg:mt-4 lg:space-y-4 lg:border-slate-200"
+                  >
+                    {item.childMenu &&
+                      item.childMenu.map((child) => (
+                        <li key={child.page} className="relative">
                           <Link
                             className=" text-sm block w-full pl-3.5 before:pointer-events-none before:absolute 
                                 
@@ -168,8 +167,8 @@ export default function ProductsLayout(props: { children: ReactNode }) {
                             )}
                           </Link>
                         </li>
-                      </ul>
-                    ))}
+                      ))}
+                  </ul>
                 </>
               ))}
             </nav>
