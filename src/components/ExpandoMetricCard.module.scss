@@ -1,0 +1,62 @@
+
+.metric_card {
+    margin: 15px;
+    width: calc((100% / 3) - 30px)
+}
+
+
+
+.metric_card:nth-of-type(3n+1) {
+
+    .expando_metric_card{
+        width: calc(300% + 60px);
+
+    }
+}
+
+.metric_card:nth-of-type(3n+2) {
+   
+
+    .expando_metric_card{
+        width: calc(300% + 30px);
+        margin-left: calc(-100% - 30px);
+       
+    }
+}
+
+.metric_card:nth-of-type(3n) {
+
+    .expando_metric_card{
+        width: calc(300% + 30px);
+        margin-left: calc(-200% - 30px);
+  
+    }
+}
+
+
+// .expando_metric_card {
+//  width: calc(300% + 30px);
+//  margin-left: calc(-200% - 30px)
+// }
+
+// .expando_metric_card:c(3n+1) .card__expander {
+//     width: calc(300% + 30px);
+//     margin-left: calc(-200% - 30px);
+//     background-color: red;
+//   }
+
+//   .expando_metric_card:nth-of-type(3n+2) {
+//     width: calc(300% + 30px);
+//     margin-left: calc(-100% - 30px);
+//     background-color: green;
+//   }
+
+
+//   .expando_metric_card:nth-of-type(3n) {
+//     width: calc(300% + 30px);
+//     margin-left: calc(-100% - 30px);
+//     background-color: blue;
+//   }
+
+
+
