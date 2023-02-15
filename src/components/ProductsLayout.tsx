@@ -8,14 +8,15 @@ const MenuItems = [
     page: "",
     badge: 24,
     childMenu: [
-      { title: "Project Health", page: "ProjectHealth", badge: 12 },
+      { title: "Project Health", page: "ProjectHealth" },
       {
         title: "Infrastructure Health",
         page: "InfrastructureHealth",
-        badge: 12,
+        
       },
-      { title: "Product Health", page: "ProductHealth", badge: 12 },
-      { title: "Security Health", page: "SecurityHealth", badge: 12 },
+      { title: "Product Health", page: "ProductHealth" },
+      { title: "Security Health", page: "SecurityHealth" },
+      { title: "Code Health", page: "CodeHealth" },
     ],
   },
   { title: "Team", page: "Team" },
@@ -160,11 +161,11 @@ export default function ProductsLayout(props: { children: ReactNode }) {
                             href={`/Products/${ProductCode}/${child.page}`}
                           >
                             {child.title}
-                            {child.badge && (
+                            {/* {child.badge && (
                               <span className="bg-red-100 group-hover:bg-gray-200 ml-3 inline-block py-0.5 px-3 text-xs font-medium rounded-full">
                                 {child.badge}
                               </span>
-                            )}
+                            )} */}
                           </Link>
                         </li>
                       ))}

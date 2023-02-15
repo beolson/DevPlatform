@@ -1,272 +1,142 @@
+import ExpandoMetricCard from "@/components/ExpandoMetricCard";
+import MetricCard from "@/components/MetricCard";
+import MetricTable, { IMetricTableProps } from "@/components/MetricTable";
 import ProductsLayout from "@/components/ProductsLayout";
+import { useState } from "react";
+
+const storyTableData: IMetricTableProps<{status: string, title: string}> = {
+  columns: [{
+    title: "Status",
+    objectKey: "status"
+  },
+  {
+    title: "Title",
+    objectKey: "title"
+  }],
+  data: [
+      {status: "Open",  title: "Build something good" },
+      {status: "Closed",  title: "Build something Better" },
+      {status: "In Progress",  title: "Build something Best" },
+      {status: "Open",  title: "Build something Wonderful" },
+      {status: "Open",  title: "Build something Excelent" }
+]
+}
+
+const issueTableData: IMetricTableProps<{status: string, title: string}> = {
+  columns: [{
+    title: "Status",
+    objectKey: "status"
+  },
+  {
+    title: "Title",
+    objectKey: "title"
+  }],
+  data: [
+      {status: "Open",  title: "This is broken" },
+      {status: "Closed",  title: "That is broken" },
+      {status: "Open",  title: "May Dog Ran Away" },
+
+]
+}
 
 const ProjectHealth = () => {
+  const [expandedCard, setExpandedCard] = useState<string | undefined>();
+
+  const toggleExpanded = (key: string) => {
+    if (expandedCard === key) {
+      setExpandedCard(undefined);
+    } else {
+      setExpandedCard(key);
+    }
+  };
   return (
     <ProductsLayout>
       <div className="p-6">
-        <dl className="mt-5 grid grid-cols-1 divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow md:grid-cols-1 md:divide-y-0 md:divide-x">
-          <div className="px-4 py-5 sm:p-6">
-            <dt className="text-base font-normal text-gray-900 text-xl">
-              Project Health Score
-            </dt>
-            <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
-              <div className="flex items-baseline text-2xl font-semibold text-indigo-600">
-                12
-              </div>
-
-              <div className="inline-flex items-baseline px-2.5 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800 md:mt-2 lg:mt-0">
-                <svg
-                  className="-ml-1 mr-0.5 h-5 w-5 flex-shrink-0 self-center text-green-500"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M10 17a.75.75 0 01-.75-.75V5.612L5.29 9.77a.75.75 0 01-1.08-1.04l5.25-5.5a.75.75 0 011.08 0l5.25 5.5a.75.75 0 11-1.08 1.04l-3.96-4.158V16.25A.75.75 0 0110 17z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-                <span className="sr-only"> Increased by </span>
-                12%
-              </div>
-            </dd>
-          </div>
-        </dl>
-
         <h3 className="text-lg font-medium leading-6 text-gray-900 pt-6">
-          Dora Metrics 6 Months Average
+          6 Month Dora Metrics
         </h3>
-        <dl className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3 ">
-          <div className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
-            <dt className="text-base font-normal text-gray-900">
-              Deployment Frequency
-            </dt>
-            <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
-              <div className="flex items-baseline text-2xl font-semibold text-indigo-600">
-                3
-                <span className="ml-2 text-sm font-medium text-gray-500">
-                  deployments in last 6 months
-                </span>
-              </div>
+        <dl className="flex flex-wrap flex-row">
+          <MetricCard
+            title="Deployment Frequency"
+            Measurements={[
+              {
+                units: "Deployments",
+                value: 6,
+              },
+            ]}
+          />
+          <MetricCard
+            title="Time to Restore Service"
+            Measurements={[
+              {
+                units: "Month",
+                value: 1,
+              },
+            ]}
+          />
+          <MetricCard
+            title="Lead Time for Change"
+            Measurements={[
+              {
+                units: "Months",
+                value: 2,
+              },
+            ]}
+          />
 
-              <div className="inline-flex items-baseline px-2.5 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800 md:mt-2 lg:mt-0">
-                <svg
-                  className="-ml-1 mr-0.5 h-5 w-5 flex-shrink-0 self-center text-green-500"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M10 17a.75.75 0 01-.75-.75V5.612L5.29 9.77a.75.75 0 01-1.08-1.04l5.25-5.5a.75.75 0 011.08 0l5.25 5.5a.75.75 0 11-1.08 1.04l-3.96-4.158V16.25A.75.75 0 0110 17z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-                <span className="sr-only"> Increased by </span>
-                12%
-              </div>
-            </dd>
-          </div>
-
-          <div className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
-            <dt className="text-base font-normal text-gray-900">
-              Time to Restore Service
-            </dt>
-            <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
-              <div className="flex items-baseline text-2xl font-semibold text-indigo-600">
-                1
-                <span className="ml-2 text-sm font-medium text-gray-500">
-                  Month
-                </span>
-              </div>
-
-              <div className="inline-flex items-baseline px-2.5 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800 md:mt-2 lg:mt-0">
-                <svg
-                  className="-ml-1 mr-0.5 h-5 w-5 flex-shrink-0 self-center text-green-500"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M10 17a.75.75 0 01-.75-.75V5.612L5.29 9.77a.75.75 0 01-1.08-1.04l5.25-5.5a.75.75 0 011.08 0l5.25 5.5a.75.75 0 11-1.08 1.04l-3.96-4.158V16.25A.75.75 0 0110 17z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-                <span className="sr-only"> Increased by </span>
-                12%
-              </div>
-            </dd>
-          </div>
-
-          <div className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
-            <dt className="text-base font-normal text-gray-900">
-              Lead time for Change
-            </dt>
-            <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
-              <div className="flex items-baseline text-2xl font-semibold text-indigo-600">
-                2
-                <span className="ml-2 text-sm font-medium text-gray-500">
-                  Months
-                </span>
-              </div>
-
-              <div className="inline-flex items-baseline px-2.5 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800 md:mt-2 lg:mt-0">
-                <svg
-                  className="-ml-1 mr-0.5 h-5 w-5 flex-shrink-0 self-center text-green-500"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M10 17a.75.75 0 01-.75-.75V5.612L5.29 9.77a.75.75 0 01-1.08-1.04l5.25-5.5a.75.75 0 011.08 0l5.25 5.5a.75.75 0 11-1.08 1.04l-3.96-4.158V16.25A.75.75 0 0110 17z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-                <span className="sr-only"> Increased by </span>
-                12%
-              </div>
-            </dd>
-          </div>
-
-          <div className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
-            <dt className="text-base font-normal text-gray-900">
-              Change Failure Rate
-            </dt>
-            <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
-              <div className="flex items-baseline text-2xl font-semibold text-indigo-600">
-                3
-                <span className="ml-2 text-sm font-medium text-gray-500">
-                  Issues
-                </span>
-              </div>
-
-              <div className="inline-flex items-baseline px-2.5 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800 md:mt-2 lg:mt-0">
-                <svg
-                  className="-ml-1 mr-0.5 h-5 w-5 flex-shrink-0 self-center text-green-500"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M10 17a.75.75 0 01-.75-.75V5.612L5.29 9.77a.75.75 0 01-1.08-1.04l5.25-5.5a.75.75 0 011.08 0l5.25 5.5a.75.75 0 11-1.08 1.04l-3.96-4.158V16.25A.75.75 0 0110 17z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-                <span className="sr-only"> Increased by </span>
-                12%
-              </div>
-            </dd>
-          </div>
+          <MetricCard
+            title="Change Failure Rate"
+            Measurements={[
+              {
+                units: "Issues Per Deployment",
+                value: 6,
+              },
+            ]}
+          />
         </dl>
 
         <h3 className="text-lg font-medium leading-6 text-gray-900 pt-6">
-          Work Item Tracking
+          Work Item Tracking <span className="text-indigo-600 pl-4 text-xs font-normal"><a href="#" >Open In Azure DevOps</a></span>
         </h3>
         <span className="ml-2 text-sm font-medium text-gray-500">
           Sprint 12. March 2, 2023 - March 15, 2023
         </span>
-        <dl className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3 ">
-          <div className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
-            <dt className="text-base font-normal text-gray-900">
-              Open Stories
-            </dt>
-            <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
-              <div className="flex items-baseline text-2xl font-semibold text-indigo-600">
-                3
-              </div>
+        <dl className="flex flex-wrap flex-row">
+          <ExpandoMetricCard
+          onClick={() => toggleExpanded("stories")}
+          expanded={expandedCard === "stories"}
+            title="Stories"
+            Measurements={[
+              {
+                units: "Open",
+                value: 6,
+              },
+              {
+                units: "Closed",
+                value: 3,
+              },
+              {
+                units: "In Progress",
+                value: 12,
+              },
+            ]}
+          ><MetricTable columns={storyTableData.columns} data={storyTableData.data}></MetricTable></ExpandoMetricCard>
 
-              <div className="inline-flex items-baseline px-2.5 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800 md:mt-2 lg:mt-0">
-                <svg
-                  className="-ml-1 mr-0.5 h-5 w-5 flex-shrink-0 self-center text-green-500"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M10 17a.75.75 0 01-.75-.75V5.612L5.29 9.77a.75.75 0 01-1.08-1.04l5.25-5.5a.75.75 0 011.08 0l5.25 5.5a.75.75 0 11-1.08 1.04l-3.96-4.158V16.25A.75.75 0 0110 17z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-                <span className="sr-only"> Increased by </span>
-                12%
-              </div>
-            </dd>
-          </div>
-
-          <div className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
-            <dt className="text-base font-normal text-gray-900">
-              Closed Stories
-            </dt>
-            <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
-              <div className="flex items-baseline text-2xl font-semibold text-indigo-600">
-                1
-                <span className="ml-2 text-sm font-medium text-gray-500">
-                  Month
-                </span>
-              </div>
-
-              <div className="inline-flex items-baseline px-2.5 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800 md:mt-2 lg:mt-0">
-                <svg
-                  className="-ml-1 mr-0.5 h-5 w-5 flex-shrink-0 self-center text-green-500"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M10 17a.75.75 0 01-.75-.75V5.612L5.29 9.77a.75.75 0 01-1.08-1.04l5.25-5.5a.75.75 0 011.08 0l5.25 5.5a.75.75 0 11-1.08 1.04l-3.96-4.158V16.25A.75.75 0 0110 17z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-                <span className="sr-only"> Increased by </span>
-                12%
-              </div>
-            </dd>
-          </div>
-
-          <div className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
-            <dt className="text-base font-normal text-gray-900">
-              In Progress Stories
-            </dt>
-            <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
-              <div className="flex items-baseline text-2xl font-semibold text-indigo-600">
-                2
-                <span className="ml-2 text-sm font-medium text-gray-500">
-                  Stories
-                </span>
-              </div>
-
-              <div className="inline-flex items-baseline px-2.5 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800 md:mt-2 lg:mt-0">
-                <svg
-                  className="-ml-1 mr-0.5 h-5 w-5 flex-shrink-0 self-center text-green-500"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M10 17a.75.75 0 01-.75-.75V5.612L5.29 9.77a.75.75 0 01-1.08-1.04l5.25-5.5a.75.75 0 011.08 0l5.25 5.5a.75.75 0 11-1.08 1.04l-3.96-4.158V16.25A.75.75 0 0110 17z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-                <span className="sr-only"> Increased by </span>
-                12%
-              </div>
-            </dd>
-          </div>
+          <ExpandoMetricCard
+            title="Issues"
+            onClick={() => toggleExpanded("issues")}
+            expanded={expandedCard === "issues"}
+            Measurements={[
+              {
+                units: "Open",
+                value: 6,
+              },
+              {
+                units: "Resolved",
+                value: 3,
+              }
+            ]}
+            ><MetricTable columns={issueTableData.columns} data={issueTableData.data}></MetricTable></ExpandoMetricCard>
         </dl>
       </div>
     </ProductsLayout>

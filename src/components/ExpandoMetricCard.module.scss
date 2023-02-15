@@ -4,8 +4,6 @@
     width: calc((100% / 3) - 30px)
 }
 
-
-
 .metric_card:nth-of-type(3n+1) {
 
     .expando_metric_card{
@@ -15,8 +13,6 @@
 }
 
 .metric_card:nth-of-type(3n+2) {
-   
-
     .expando_metric_card{
         width: calc(300% + 30px);
         margin-left: calc(-100% - 30px);

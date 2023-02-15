@@ -1,10 +1,9 @@
 import ProductsLayout from "@/components/ProductsLayout";
-import * as Icons from "@/components/Icons";
 import MetricCard from "@/components/MetricCard";
 import ExpandoMetricCard from "@/components/ExpandoMetricCard";
 import { useState } from "react";
 
-const ProjectHealth = () => {
+const CodeHealth = () => {
   const [expandedCard, setExpandedCard] = useState<string | undefined>();
 
   const toggleExpanded = (key: string) => {
@@ -19,24 +18,28 @@ const ProjectHealth = () => {
     <ProductsLayout>
       <div className="p-6">
         <h3 className="text-lg font-medium leading-6 text-gray-900 pt-6">
-          Product Health
+          Code Health
         </h3>
 
         <dl className="flex flex-wrap flex-row">
           <ExpandoMetricCard
             onClick={() => toggleExpanded("MilesOfRoad")}
             expanded={expandedCard === "MilesOfRoad"}
-            title="Miles of Road Built"
+            title="Lint Issues"
             Measurements={[
               {
-                units: "Miles",
-                value: 100,
+                units: "Issues",
+                value: 0,
               },
             ]}
           ><div>Hello</div></ExpandoMetricCard>
           <MetricCard
-            title="Active Montly Users"
-            Measurements={[{ units: "Users", value: 30 }]}
+            title="Code Analysis Issues"
+            Measurements={[{ units: "Issues", value: 30 }]}
+          />
+          <MetricCard
+            title="Foundation Component Usage"
+            Measurements={[{ units: "Components", value: 30 }]}
           />
         </dl>
       </div>
@@ -44,4 +47,4 @@ const ProjectHealth = () => {
   );
 };
 
-export default ProjectHealth;
+export default CodeHealth;
