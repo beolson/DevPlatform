@@ -1,4 +1,9 @@
-const CreateProductModal = (props: {onFinish: () => void}) => {
+import { useState } from "react";
+
+const CreateProductModal = (props: { onFinish: () => void }) => {
+  
+  const [productCode, setProductCode] = useState("");
+
   return (
     <div
       className="relative z-10"
@@ -23,65 +28,133 @@ const CreateProductModal = (props: {onFinish: () => void}) => {
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                   stroke="currentColor"
                   aria-hidden="true"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M6 18L18 6M6 6l12 12"
                   />
                 </svg>
               </button>
             </div>
-            <div className="sm:flex sm:items-start">
-              <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-                <svg
-                  className="h-6 w-6 text-red-600"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"
-                  />
-                </svg>
-              </div>
-              <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                <h3
-                  className="text-lg font-medium leading-6 text-gray-900"
-                  id="modal-title"
-                >
-                  Deactivate account
-                </h3>
-                <div className="mt-2">
-                  <p className="text-sm text-gray-500">
-                    Are you sure you want to deactivate your account? All of
-                    your data will be permanently removed from our servers
-                    forever. This action cannot be undone.
-                  </p>
+
+            <div className="mt-5 sm:mt-4  sm:flex-row-reverse">
+              <form className="space-y-8 ">
+                <div className="space-y-8">
+                  <div className="space-y-6 sm:space-y-5">
+                    <div>
+                      <h3 className="text-lg font-medium leading-6 text-gray-900">
+                        New Product
+                      </h3>
+                    </div>
+                  </div>
+
+                  <div className="">
+                    <div className="space-y-6 sm:space-y-5">
+                      <div className="sm:grid sm:grid-cols-3 sm:items-start ">
+                        <label
+                          htmlFor="first-name"
+                          className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                        >
+                          3 Letter Product Code
+                        </label>
+                        <div className="mt-1 sm:col-span-2 sm:mt-0">
+                          <input
+                            type="text"
+                            name="ProductCode"
+                            className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm"
+                            value={productCode}
+                            onChange={(e) => setProductCode(e.target.value)}
+                          />
+                          {productCode === "abc" && (
+                            <label
+                              htmlFor="first-name"
+                              className="block text-sm font-medium text-red-700 sm:mt-px sm:pt-2"
+                            >
+                              Code Not Found
+                            </label>
+                          )}
+
+                          {productCode === "bcd" && (
+                            <label
+                              htmlFor="first-name"
+                              className="block text-sm font-medium text-red-700 sm:mt-px sm:pt-2"
+                            >
+                              Product not in Execute Phase
+                            </label>
+                          )}
+
+                          {productCode === "cde" && (
+                            <label
+                              htmlFor="first-name"
+                              className="block text-sm font-medium text-red-700 sm:mt-px sm:pt-2"
+                            >
+                              Blueprint not found
+                            </label>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="sm:grid sm:grid-cols-3 sm:items-start ">
+                        <label
+                          htmlFor="country"
+                          className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                        >
+                          Backend Template
+                        </label>
+                        <div className="mt-1 sm:col-span-2 sm:mt-0">
+                          <select
+                            id="country"
+                            name="country"
+                            className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm"
+                          >
+                            <option>.NET IDesign</option>
+                            <option>Python Flask</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div className="sm:grid sm:grid-cols-3 sm:items-start ">
+                        <label
+                          htmlFor="country"
+                          className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                        >
+                          Frontend Template
+                        </label>
+                        <div className="mt-1 sm:col-span-2 sm:mt-0">
+                          <select
+                            id="country"
+                            name="country"
+                            className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm"
+                          >
+                            <option>CRA React JS</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
-              <button
-                type="button"
-                className="inline-flex w-full justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
-              >
-                Deactivate
-              </button>
-              <button
-                type="button"
-                className="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:w-auto sm:text-sm"
-              >
-                Cancel
-              </button>
+
+                <div className="pt-5">
+                  <div className="flex justify-end">
+                    <button
+                      type="button"
+                      className="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="submit"
+                      className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    >
+                      Create Product
+                    </button>
+                  </div>
+                </div>
+              </form>
             </div>
           </div>
         </div>
